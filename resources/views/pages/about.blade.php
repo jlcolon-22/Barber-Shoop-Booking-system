@@ -4,9 +4,9 @@
 @section('content')
 	<x-frontend_header/>
 
-<main class="bg-[url('/assets/bg3.jpeg')]  bg-cover bg-center py-[5rem] min-h-[100svh] origin-bottom items-center z-50 ">
+<main class="bg-[url('/assets/bg3.jpeg')]  bg-cover bg-center pt-[5rem] min-h-[100svh] origin-bottom items-center z-50 ">
 
-		<div class="sm:flex px-10 items-center bg-black bg-opacity-60 mx-auto max-w-screen-xl">
+		<div class="sm:flex  items-center bg-black bg-opacity-60 mx-auto ">
     <div class="sm:w-1/2 p-10">
         <div class="image object-center text-center">
             <img src="{{ asset('assets/about.png')}}">
