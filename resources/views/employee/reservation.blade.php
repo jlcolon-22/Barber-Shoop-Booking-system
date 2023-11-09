@@ -1,17 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-<x-frontend_header/>
-<main class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center pb-[5rem] pt-[7rem] min-h-[100svh] origin-bottom items-center z-50 px-3 ">
+<x-emplooyee/>
 
-    <div  class="grid grid-cols-1 lg:w-4/5 px-10  mx-auto py-10 bg-black bg-opacity-90">
-          <h1 class="pb-10 font-bold">User Appointment History</h1>
-       @if(session()->has('success'))
-        <div class="p-4 mb-10 text-sm rounded-lg  bg-gray-800 text-green-400" role="alert">
-          <span class="font-medium">Updated Successfully!</span> 
-        </div>
-       @endif
-        @csrf
+ <div class="p-4 sm:ml-64">
+        <div class="p-4  rounded-lg ">
+
+            <!-- Breadcrumb -->
+            <nav class="flex px-5 py-3 text-gray-700 border  rounded-lg bg-gray-800 border-gray-700" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="/owner/dashboard"
+                            class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white">
+                            <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Appointment
+                        </a>
+                    </li>
+
+                  
+                </ol>
+            </nav>
+
+            <main class="pt-10">
+              
+
      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left  text-gray-400">
                         <thead class="text-xs  uppercase  bg-gray-700 text-gray-400">
@@ -25,7 +41,7 @@
                                 <th scope="col" class="px-6 py-3">
                                     Category
                                 </th>
-                                 <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-6 py-3">
                                     Date
                                 </th><th scope="col" class="px-6 py-3">
                                     Time
@@ -58,8 +74,8 @@
                                     </td>
                                     <td class="px-6 py-4">
                                        {{$appointment->postInfo->category}}
-                                    </td>
-                                     <td class="px-6 py-4 whitespace-nowrap">
+                                    </td>                                  
+                                      <td class="px-6 py-4 whitespace-nowrap">
                                        {{\Carbon\Carbon::parse($appointment->date)->format('d-m-Y')}}
                                     </td>                                 
                                        <td class="px-6 py-4">
@@ -81,13 +97,13 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4">
-                                       {{--  <branch_edit owners="{{ $owners }}" data="{{ $branch }}">
-
-                                        </branch_edit owners="{{ $owners }}"> --}}
-                                        @if($appointment->status != 2 && $appointment->status != 1)
+                                    <td class="px-6 py-4  ">
+                                       @if($appointment->status != 2)
+                                         <a href="/owner/appointment/{{$appointment->id}}/approved" class="text-green-500 mr-2 font-bold">Approved</a>                                        
                                             <a href="/appointment/{{$appointment->id}}" class="text-red-500 font-bold">Cancel</a>
-                                        @endif
+                                       @endif
+                                 
+                                       
                                     </td>
                                 </tr>
                             @empty
@@ -102,13 +118,14 @@
                         </tbody>
                     </table>
                     <div class="py-5 px-1">
-                        {{-- {{ $branches->links('pagination::tailwind') }} --}}
+                       {{ $appointments->links('pagination::tailwind') }}
                     </div>
-                </div>
+                </div> 
 
-</div>
+            </main>
+        </div>
+    </div>
 
-</main>
 
 @endsection
 

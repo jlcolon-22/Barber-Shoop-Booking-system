@@ -28,7 +28,7 @@ class OwnerController extends Controller
     public function appointment()
     {
         $branch = Branch::where('owner_id',Auth::id())->first();
-        $appointments = Reservation::with('postInfo','branchInfo')->where('branch_id',$branch->id)->paginate(10);
+        $appointments = Reservation::with('postInfo','branchInfo')->where('branch_id',$branch->id)->latest()->paginate(10);
         return view('owner.reservation',compact('appointments'));
     }
     public function certificate()

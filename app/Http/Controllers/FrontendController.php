@@ -46,7 +46,7 @@ class FrontendController extends Controller
     public function appointment()
     {
 
-        $appointments = Reservation::with('postInfo','branchInfo')->where('user_id',Auth::id())->paginate(10);
+        $appointments = Reservation::with('postInfo','branchInfo')->where('user_id',Auth::id())->latest()->paginate(10);
         return view('pages.appointment' ,compact('appointments'));
     } 
     public function update_appointment(Reservation $id)

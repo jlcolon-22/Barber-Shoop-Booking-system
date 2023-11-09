@@ -86,6 +86,11 @@ class AuthController extends Controller
 
                 return redirect('/');
                }
+                if(Auth::user()->role == 1)
+               {
+
+                return redirect('/employee/appointment');
+               }
         }else{
             return back()->with(['error'=>'Wrong Credentials']);
         }

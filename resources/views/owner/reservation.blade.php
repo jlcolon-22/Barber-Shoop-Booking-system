@@ -52,6 +52,11 @@
                                     Category
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Date
+                                </th><th scope="col" class="px-6 py-3">
+                                    Time
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Branch Name
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -79,6 +84,12 @@
                                     </td>
                                     <td class="px-6 py-4">
                                        {{$appointment->postInfo->category}}
+                                    </td>                                  
+                                      <td class="px-6 py-4 whitespace-nowrap">
+                                       {{\Carbon\Carbon::parse($appointment->date)->format('d-m-Y')}}
+                                    </td>                                 
+                                       <td class="px-6 py-4">
+                                       {{$appointment->time}}
                                     </td>
                                     <td class="px-6 py-4">
                                        {{ $appointment->branchInfo->name}}
@@ -97,8 +108,10 @@
                                     </td>
 
                                     <td class="px-6 py-4  ">
+                                       @if($appointment->status != 2)
                                          <a href="/owner/appointment/{{$appointment->id}}/approved" class="text-green-500 mr-2 font-bold">Approved</a>                                        
                                             <a href="/appointment/{{$appointment->id}}" class="text-red-500 font-bold">Cancel</a>
+                                       @endif
                                  
                                        
                                     </td>

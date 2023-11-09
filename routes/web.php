@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\API\admin\AdminDashboardController;
 use App\Http\Controllers\API\OwnerController;
+use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontendController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,9 @@ Route::get('/contact', function() {
 });
 Route::get('/booked', function() {
     return view('pages.booked');
+});
+Route::get('/about', function() {
+    return view('pages.about');
 });
 Route::get('/reservation',[FrontendController::class, 'reservation']);
 Route::post('/reservation',[FrontendController::class, 'store_reservation']);
@@ -74,4 +79,9 @@ Route::get('/auth/logout',[AuthController::class,'userLogout']);
         Route::get('/appointment/{id}/approved',[OwnerController::class,'update_appointment']);
     });
 
+
+     Route::prefix('employee')->group(function (){
+
+         Route::get('appointment',[EmployeeController::class,'appointment']);
+        });
 

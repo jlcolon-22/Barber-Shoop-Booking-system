@@ -6,13 +6,13 @@
             <li class="relative">
                 <a href="/" class="peer">Home</a>
                 <div
-                    class="h-[3px] w-full bg-gray-50   absolute peer-hover:bg-gray-50 peer-hover:w-full transition-all ease-in-out duration-700">
+                    class="h-[3px] w-0 {{request()->is('/') ? 'bg-gray-50 w-full' : ''}} peer-hover:bg-gray-5  absolute peer-hover:bg-gray-50 peer-hover:w-full transition-all ease-in-out duration-700">
                 </div>
             </li>
             <li class="relative">
                 <a href="/services" class="peer">Services</a>
                 <div
-                    class="h-[3px] w-0  absolute peer-hover:bg-gray-50 peer-hover:w-full transition-all ease-in-out duration-700">
+                    class="h-[3px] w-0  absolute {{request()->is('services') ? 'bg-gray-50 w-full' : ''}}    peer-hover:bg-gray-50 peer-hover:w-full transition-all ease-in-out duration-700">
                 </div>
             </li>
             {{--     <li class="relative">
@@ -20,15 +20,15 @@
                     <div class="h-[3px] w-0  absolute peer-hover:bg-gray-50 peer-hover:w-full transition-all ease-in-out duration-700"></div>
                 </li> --}}
             <li class="relative">
-                <a href="" class="peer">About</a>
+                <a href="/about" class="peer">About</a>
                 <div
-                    class="h-[3px] w-0  absolute peer-hover:bg-gray-50 peer-hover:w-full transition-all ease-in-out duration-700">
+                    class="h-[3px] w-0 {{request()->is('about') ? 'bg-gray-50 w-full' : ''}}  absolute peer-hover:bg-gray-50 peer-hover:w-full transition-all ease-in-out duration-700">
                 </div>
             </li>
             <li class="relative">
                 <a href="/contact" class="peer">Contact Us</a>
                 <div
-                    class="h-[3px] w-0  absolute peer-hover:bg-gray-50 peer-hover:w-full transition-all ease-in-out duration-700">
+                    class="h-[3px] w-0 {{request()->is('contact') ? 'bg-gray-50 w-full' : ''}} absolute peer-hover:bg-gray-50 peer-hover:w-full transition-all ease-in-out duration-700">
                 </div>
             </li>
 

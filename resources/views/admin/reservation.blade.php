@@ -51,6 +51,11 @@
                                 <th scope="col" class="px-6 py-3">
                                     Category
                                 </th>
+                                 <th scope="col" class="px-6 py-3">
+                                    Date
+                                </th><th scope="col" class="px-6 py-3">
+                                    Time
+                                </th>
                                 <th scope="col" class="px-6 py-3">
                                     Branch Name
                                 </th>
@@ -77,6 +82,12 @@
                                     </td>
                                     <td class="px-6 py-4">
                                        {{$appointment->postInfo->category}}
+                                    </td>
+                                      <td class="px-6 py-4 whitespace-nowrap">
+                                       {{\Carbon\Carbon::parse($appointment->date)->format('d-m-Y')}}
+                                    </td>                                 
+                                       <td class="px-6 py-4">
+                                       {{$appointment->time}}
                                     </td>
                                     <td class="px-6 py-4">
                                        {{ $appointment->branchInfo->name}}
