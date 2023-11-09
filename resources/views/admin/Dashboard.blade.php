@@ -27,28 +27,64 @@
        </nav>
 
 
-       {{-- <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d123552.91083709442!2d121.10379569530986!3d14.597453973598652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sbarber%20shop%20antipolo!5e0!3m2!1sen!2sph!4v1699368737989!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
+      
+       <main class="mt-10">
+           
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left  text-gray-400">
+                        <thead class="text-xs  uppercase  bg-gray-700 text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                   Hairstyle name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Photo
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Barber
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Price
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Category
+                                </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($posts as $post)
+                                <tr class=" border-b bg-gray-900 border-gray-700">
+                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
+                                        {{ $post->name }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        <img src="{{ $post->photo }}" class="h-[4rem] w-[4rem]" loading="lazy"
+                                            alt="">
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $post->employeeInfo?->firstname .' '. $post->employeeInfo?->lastname  }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        ₱{{ $post->price }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $post->category  }}
+                                    </td>
+
+                                  
+                                </tr>
+                            @empty
+                            @endforelse
 
 
-       <div class="" style="
-      height: 65vh;
-      overflow: hidden;
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    ">
-  <div style="
-        position: absolute;
-        bottom: 0;
-        height: 100%;
-        width: calc(100vw + 600px);
-      ">
-{{--     <iframe class="border-card" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1877201.646144031!2d91.52807767106037!3d23.228182322195394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x374d0bd19f3f36f7%3A0xb1f62692a3d5e474!2sMizoram!5e0!3m2!1sen!2sin!4v1681814341442!5m2!1sen!2sin"
-      width="100%" height="100%" allowfullscreen="" loading="lazy"></iframe> --}}
-      <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d123552.91083709442!2d121.10379569530986!3d14.597453973598652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sbarber%20shop%20antipolo!5e0!3m2!1sen!2sph!4v1699368737989!5m2!1sen!2sph" width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </div>
-</div>
+                        </tbody>
+                    </table>
+                    <div class="py-5 px-1">
+                        {{-- {{ $employees->links('pagination::tailwind') }} --}}
+                    </div>
+                </div>
+       </main>
         </div>
     </div>
 @endsection

@@ -48,6 +48,7 @@ Route::get('/auth/logout',[AuthController::class,'userLogout']);
     // admin
     Route::middleware(['admin.only'])->prefix('admin')->group(function () {
         Route::get('/dashboard',[AdminDashboardController::class,'index']);
+         Route::get('appointment',[AdminDashboardController::class,'appointment']);
         Route::get('/account',[AdminDashboardController::class,'account']);
         Route::get('/branch',[AdminDashboardController::class,'branch']);
         Route::post('/branch',[AdminDashboardController::class,'store_branch']);

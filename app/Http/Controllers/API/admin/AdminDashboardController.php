@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\admin;
 use App\Models\Branch;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -13,8 +15,19 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        return view("admin.Dashboard");
+        $posts = Post::query()->with('employeeInfo')->latest()->paginate(10);
+        
+
+        return view("admin.Dashboard",compact('posts'));
     }
+
+    public function appointment()
+    {
+   
+        $appointments = Reservation::with('postInfo','branchInfo')->orderBy('id','desc')->paginate(10);
+        return view('admin.reservation',compact('appointments'));
+    }
+
 
     public function account()
     {
