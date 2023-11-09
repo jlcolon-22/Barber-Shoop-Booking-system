@@ -38,9 +38,13 @@ Route::get('/auth/forget', function() {
     return view('auth.forget');
 });
 
-Route::post('/contact',[FrontendController::class, 'contact']);
-Route::get('/reservation',[FrontendController::class, 'reservation']);
+Route::middleware('customer.only')->group(function(){
+    Route::get('/reservation',[FrontendController::class, 'reservation']);
 Route::post('/reservation',[FrontendController::class, 'store_reservation']);
+});
+
+Route::post('/contact',[FrontendController::class, 'contact']);
+
 Route::get('/appointment',[FrontendController::class, 'appointment']);
 Route::get('/appointment/{id}',[FrontendController::class, 'update_appointment']);
 Route::get('/account',[FrontendController::class, 'account']);
