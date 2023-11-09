@@ -30,4 +30,8 @@ class Branch extends Model
     {
         return $this->hasMany(Post::class,'owner_id','owner_id');
     }
+     public function feedbacks()
+    {
+        return $this->hasMany(Feedback::class,'branch_id','id');
+    }
 }

@@ -51,6 +51,7 @@ class AdminDashboardController extends Controller
             'email_verified_at'=>now(),
             'password'=>Hash::make($request->password)
         ]);
+        $user->markEmailAsVerified();
         if($user)
         {
             $filename = time().'-owner.'.$request->profile->extension();

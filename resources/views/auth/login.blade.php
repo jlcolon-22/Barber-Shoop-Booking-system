@@ -26,6 +26,28 @@
                     </div>
                   </div>
                    @endif
+                   @if (session()->has('verified'))
+                   <div class="flex items-center p-4 mb-4 text-sm  rounded-lg  bg-gray-800 text-green-400" role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                      <span class="font-medium">The verification of your account was successful!</span>
+                    </div>
+                  </div>
+                   @endif
+                    @if (session()->has('errors'))
+                   <div class="flex items-center p-4 mb-4 text-sm  rounded-lg  bg-gray-800 text-yellow-400" role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                      <span class="font-medium">Your account is not verified.</span>
+                    </div>
+                  </div>
+                   @endif
                     @csrf
                     <div>
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-50">Email address</label>
@@ -39,7 +61,7 @@
                         <div class="flex items-center justify-between">
                             <label for="password" class="block text-sm font-medium leading-6 text-gray-50">Password</label>
                             <div class="text-sm">
-                                <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot
+                                <a href="/auth/forget" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot
                                     password?</a>
                             </div>
                         </div>

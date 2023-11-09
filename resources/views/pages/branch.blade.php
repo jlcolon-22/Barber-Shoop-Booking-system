@@ -62,7 +62,7 @@
 
 
 
-                        <!-- Use https://simpleicons.org/ to find the svg for your preferred product -->
+                        <a onclick="closeFeedback()" class="text-yellow-400 underline mt-2">view feedback</a>
 
                     </div>
 
@@ -108,14 +108,14 @@
                         <div
                             class="w-full h-fit max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <div class=" min-h-[16rem] max-h-[16rem] overflow-hidden relative">
-                                <a href="/reservation?name={{ $post->name }}&q={{ $post->id }}">
+                                <a type="button">
                                     <img class=" h-full rounded-t-lg object-cover origin-top-left  w-full"
                                         src="{{ asset($post->photo) }}" alt="product image" loading="lazy" />
                                 </a>
                             </div>
                             <div class="px-5 pb-5 pt-2">
                                 <h2 class="text-blue-500">{{ '#' . $post->category }}</h2>
-                                <a href="/reservation?name={{ $post->name }}&q={{ $post->id }}">
+                                <a type="button">
                                     <h5 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
                                         {{ $post->name }}</h5>
                                 </a>
@@ -168,7 +168,50 @@
       </div>
   </div>
 
+  <div id="feedbackModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0  right-0 z-50 hidden flex justify-center pt-10 w-full px-4 pb-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative w-full max-w-2xl max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <!-- Modal header -->
+              <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                      Feedbacks
+                  </h3>
+                  <button onclick="closeFeedback()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                      </svg>
+                      <span class="sr-only">Close modal</span>
+                  </button>
+              </div>
+              <!-- Modal body -->
+              <div class="p-6 space-y-6 max-h-[30rem] overflow-y-auto">
+                    
+                    @forelse($branch->feedbacks as $feedback)
+                    <article class="border-b border-gray-500">
+                        <div class="flex items-center mb-4 space-x-4" >
+                            <img class="w-10 h-10 rounded-full" src="{{asset($feedback->userInfo->profile)}}" alt="">
+                            <div class="space-y-1 font-medium dark:text-white">
+                                <p>{{ $feedback->userInfo->firstname.' '.$feedback->userInfo->lastname}}</p>
+                            </div>
+                        </div>
+                      
+                        <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Date: <time datetime="{{$feedback->created_at}}">{{\Carbon\Carbon::parse($feedback->created_at)->toDateString()}}</time></p></footer>
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">{{$feedback->message}}</p>
+                      
+                      
+                       
+                    </article>
+                    @empty
 
+
+                    @endforelse
+
+              </div>
+
+          </div>
+      </div>
+  </div>
   
 @endsection
 
@@ -193,6 +236,12 @@
         function closeModal(){
             image.classList.add('hidden')
             image.classList.remove('flex')
+
+        }
+        const feedback = document.querySelector('#feedbackModal');
+          function closeFeedback(){
+            feedback.classList.toggle('hidden')
+ 
 
         }
     </script>

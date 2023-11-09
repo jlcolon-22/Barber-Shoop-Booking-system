@@ -7,10 +7,34 @@ use App\Models\Branch;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Reservation;
+use App\Models\Feedback;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class FrontendController extends Controller
 {
+
+    public function feedback(Request $request)
+    {
+
+       Feedback::create([
+            'user_id'=>Auth::id(),
+            'branch_id'=>$request->id,
+            'message'=>$request->message,
+       ]);
+       return back()->with('feedback','s');
+    }
+    public function contact(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'message' => $request->message,
+        ];
+        \Mail::to(env('MAIL_FROM_ADDRESS'))->send(new \App\Mail\ContactMail($data));
+        return back()->with('success','true');
+    }
+
+
     public function services()
     {
 
@@ -40,7 +64,31 @@ class FrontendController extends Controller
             'post_id'=>$request->post_id,
             'user_id'=>Auth::id(),
         ]);
+        $branch = Branch::with('ownerInfo')->where('id',$request->branch_id)->first();
+        $data = [
+            'name' => $request->firstname.' '.$request->lastname,
+            'email' => $request->email,
+            'date'=>$request->date,
+            'time'=>$request->time['hours'].':'.$request->time['minutes'],
+            'message'=>'You have successfully submitted the reservation request. Please wait for us to approve your reservation.'
+        ];
+         \Mail::to($request->email)->send(new \App\Mail\Reservation($data));
+        $owners = User::where('owner_id',$branch->owner_id)->latest()->get();
+         $owner = [
+            'name' => $request->firstname.' '.$request->lastname,
+            'email' => $request->email,
+            'date'=>$request->date,
+            'time'=>$request->time['hours'].':'.$request->time['minutes'],
+            'message'=>$request->firstname.' '.$request->lastname.' submitted a reservation request.'
+         ];
+            \Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
 
+        if($owners)
+        {
+            foreach ($owners as $key => $value) {
+                \Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
+            }
+        }
 
     }
     public function appointment()
@@ -55,7 +103,32 @@ class FrontendController extends Controller
        $id->update([
         'status' => 2
        ]);
-        return back();
+        $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
+        $data = [
+            'name' => $id->firstname.' '.$id->lastname,
+            'email' => $id->email,
+            'date'=>$id->date,
+            'time'=>$id->time,
+            'message'=>'Your cancellation of the reservation request was successful.'
+        ];
+         \Mail::to($id->email)->send(new \App\Mail\Reservation($data));
+        $owners = User::where('owner_id',$branch->owner_id)->latest()->get();
+         $owner = [
+                  'name' => $id->firstname.' '.$id->lastname,
+            'email' => $id->email,
+            'date'=>$id->date,
+            'time'=>$id->time,
+            'message'=>$id->firstname.' '.$id->lastname." canceled the reservation request."
+         ];
+            \Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
+
+        if($owners)
+        {
+            foreach ($owners as $key => $value) {
+                \Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
+            }
+        }
+        return back()->with('success','true');
     }
     public function account()
     {
@@ -79,15 +152,24 @@ class FrontendController extends Controller
         if(!!$request->profile)
         {
             $filename = time().'-employee.'.$request->profile->extension();
+            if(!!$id->profile)
+            {
+                
             if($id->profile[0] != 'h')
             {
-      unlink(substr($id->profile, 1));
+                 unlink(substr($id->profile, 1));
 
             }
                   $id->update([
-                'profile'=>env('APP_MAIN_DOMAIN').'/storage/employee/'.$filename
+                'profile'=>'/storage/employee/'.$filename
             ]);
             $request->profile->storeAs('public/employee',$filename);
+            }else{
+                  $id->update([
+                'profile'=>'/storage/employee/'.$filename
+            ]);
+            $request->profile->storeAs('public/employee',$filename);
+            }
         }
 
         return back()->with('success','true');
@@ -95,9 +177,11 @@ class FrontendController extends Controller
 
     public function branch(Request $request)
     {
-        $branch = Branch::query()->where('id',$request->q)->first();
+        $branch = Branch::query()->with('feedbacks',function($q){
+            $q->with('userInfo');
+        })->where('id',$request->q)->first();
         $owner = User::with('posts','certificates')->where('id',$branch->owner_id)->first();
-
+      
         return view('pages.branch',compact('branch','owner'));
     }
 }

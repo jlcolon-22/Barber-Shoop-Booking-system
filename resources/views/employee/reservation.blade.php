@@ -26,7 +26,20 @@
             </nav>
 
             <main class="pt-10">
-              
+               @if(session()->has('success') )
+                <div class="flex items-center p-4 mb-4 text-sm  rounded-lg bg-gray-800 text-green-400" role="alert">
+  <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    <span class="font-medium">Your status change was successful!</span> 
+  </div>
+</div>
+
+        
+
+              @endif
 
      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left  text-gray-400">
@@ -92,15 +105,17 @@
                                             <span class=" text-xs font-medium mr-2 px-2.5 py-0.5 rounded bg-green-900 text-green-300">Approved</span>
                                         @elseif ($appointment->status == 0)
                                             <span class=" text-xs font-medium mr-2 px-2.5 py-0.5 rounded bg-yellow-900 text-yellow-300">Pending</span>
+                                         @elseif ($appointment->status == 3)
+                                            <span class=" text-xs font-medium mr-2 px-2.5 py-0.5 rounded bg-violet-900 text-violet-300">Finish</span>
                                         @else
                                             <span class=" text-xs font-medium mr-2 px-2.5 py-0.5 rounded bg-red-900 text-red-300">Cancelled</span>
                                         @endif
                                     </td>
 
                                     <td class="px-6 py-4  ">
-                                       @if($appointment->status != 2)
-                                         <a href="/owner/appointment/{{$appointment->id}}/approved" class="text-green-500 mr-2 font-bold">Approved</a>                                        
-                                            <a href="/appointment/{{$appointment->id}}" class="text-red-500 font-bold">Cancel</a>
+                                       @if($appointment->status != 3)
+                                         <a href="/employee/appointment/{{$appointment->id}}/done" class="px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">done</a>                                        
+                                        
                                        @endif
                                  
                                        

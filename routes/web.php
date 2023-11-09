@@ -31,6 +31,14 @@ Route::get('/booked', function() {
 Route::get('/about', function() {
     return view('pages.about');
 });
+Route::get('/verified/message', function() {
+    return view('pages.message');
+});
+Route::get('/auth/forget', function() {
+    return view('auth.forget');
+});
+
+Route::post('/contact',[FrontendController::class, 'contact']);
 Route::get('/reservation',[FrontendController::class, 'reservation']);
 Route::post('/reservation',[FrontendController::class, 'store_reservation']);
 Route::get('/appointment',[FrontendController::class, 'appointment']);
@@ -40,14 +48,20 @@ Route::post('/account/{id}',[FrontendController::class, 'update_account']);
 
 Route::get('/services',[FrontendController::class, 'services']);
 Route::get('/view',[FrontendController::class, 'branch']);
+Route::post('/feedback',[FrontendController::class, 'feedback']);
 
 // auth
 Route::get('/auth/login',[AuthController::class,'index']);
 Route::post('/auth/login',[AuthController::class,'userLogin']);
 Route::get('/auth/signup',[AuthController::class,'signup']);
+Route::post('/auth/signup',[AuthController::class,'store_signup']);
+Route::get('/auth/verification/{id}',[AuthController::class,'verified']);
 Route::get('/auth/google',[AuthController::class,'signup_google']);
 Route::get('/auth/google/callback',[AuthController::class,'google_callback']);
 Route::get('/auth/logout',[AuthController::class,'userLogout']);
+Route::post('/auth/forget',[AuthController::class,'forget']);
+Route::get('/auth/password/reset/{id}',[AuthController::class,'password']);
+Route::post('/auth/password/reset/{id}',[AuthController::class,'reset_password']);
 
 
     // admin
@@ -77,11 +91,13 @@ Route::get('/auth/logout',[AuthController::class,'userLogout']);
         Route::post('account',[OwnerController::class,'store_account']);
         Route::post('/account/{id}',[OwnerController::class,'update_account']);
         Route::get('/appointment/{id}/approved',[OwnerController::class,'update_appointment']);
+        Route::get('/appointment/{id}/cancel',[OwnerController::class,'cancel_appointment']);
     });
 
 
      Route::prefix('employee')->group(function (){
 
          Route::get('appointment',[EmployeeController::class,'appointment']);
+         Route::get('/appointment/{id}/done',[EmployeeController::class,'update_appointment']);
         });
 

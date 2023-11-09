@@ -41,8 +41,12 @@
                     class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 relative"
                     type="button">
                     <span class="sr-only">Open user menu</span>
+                    @if(!!Auth::user()->profile)
                     <img class="w-8 h-8 rounded-full" src="{{ asset(Auth::user()->profile) }}" alt="user photo">
-
+                    @else
+                     <img class="w-8 h-8 rounded-full" src="{{ 'https://eu.ui-avatars.com/api/?name='.Auth::user()->firstname.'+'.Auth::user()->lastname }}" alt="user photo">
+                    @endif
+                    
                     <!-- Dropdown menu -->
                     <div id="dropdownAvatar"
                         class="z-10 hidden bg-white divide-y divide-gray-100 absolute top-10 left-auto right-0 w-44 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">

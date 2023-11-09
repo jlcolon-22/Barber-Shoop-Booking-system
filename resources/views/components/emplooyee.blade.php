@@ -9,7 +9,10 @@
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-800">
            <button class="flex items-center pl-2.5 mb-5">
               <img src="{{ asset('logo.svg') }}" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
-              <span class="self-center text-xl font-semibold whitespace-nowrap text-white">Owner</span>
+              <div>
+                  <span class="self-center text-xl font-semibold whitespace-nowrap text-white">Employee</span>
+               ({{Auth::user()->firstname}})
+              </div>
            </button>
            <ul class="space-y-2 font-medium">
        

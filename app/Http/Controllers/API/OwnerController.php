@@ -20,15 +20,71 @@ class OwnerController extends Controller
         $id->update([
             'status' => 1
         ]);
+$branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
+        $data = [
+            'name' => $id->firstname.' '.$id->lastname,
+            'email' => $id->email,
+            'date'=>$id->date,
+            'time'=>$id->time,
+            'message'=>'Your request has been approved.'
+        ];
+         \Mail::to($id->email)->send(new \App\Mail\Reservation($data));
+        $owners = User::where('owner_id',$branch->owner_id)->latest()->get();
+         $owner = [
+                  'name' => $id->firstname.' '.$id->lastname,
+            'email' => $id->email,
+            'date'=>$id->date,
+            'time'=>$id->time,
+            'message'=>$id->firstname.' '.$id->lastname." reservation request has been approved."
+         ];
+            \Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
 
-        return back();
+        if($owners)
+        {
+            foreach ($owners as $key => $value) {
+                \Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
+            }
+        }
+        return back()->with('success','true');
+    }
+  public function cancel_appointment(Reservation $id)
+    {
+        $id->update([
+            'status' => 2
+        ]);
+$branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
+        $data = [
+            'name' => $id->firstname.' '.$id->lastname,
+            'email' => $id->email,
+            'date'=>$id->date,
+            'time'=>$id->time,
+            'message'=>'Your request has been canceled.'
+        ];
+         \Mail::to($id->email)->send(new \App\Mail\Reservation($data));
+        $owners = User::where('owner_id',$branch->owner_id)->latest()->get();
+         $owner = [
+                  'name' => $id->firstname.' '.$id->lastname,
+            'email' => $id->email,
+            'date'=>$id->date,
+            'time'=>$id->time,
+            'message'=>$id->firstname.' '.$id->lastname." reservation request has been canceled."
+         ];
+            \Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
+
+        if($owners)
+        {
+            foreach ($owners as $key => $value) {
+                \Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
+            }
+        }
+        return back()->with('success','true');
     }
 
 
     public function appointment()
     {
         $branch = Branch::where('owner_id',Auth::id())->first();
-        $appointments = Reservation::with('postInfo','branchInfo')->where('branch_id',$branch->id)->latest()->paginate(10);
+        $appointments = Reservation::with('postInfo','branchInfo')->where('branch_id',$branch->id)->latest()->paginate(6);
         return view('owner.reservation',compact('appointments'));
     }
     public function certificate()
@@ -76,6 +132,7 @@ class OwnerController extends Controller
             'owner_id'=>Auth::id(),
             'password'=>Hash::make($request->password)
         ]);
+           $user->markEmailAsVerified();
         if($user)
         {
             $filename = time().'-employee.'.$request->profile->extension();

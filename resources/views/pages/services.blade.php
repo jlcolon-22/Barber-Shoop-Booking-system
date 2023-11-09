@@ -6,7 +6,7 @@
     <x-frontend_header/>
 
 
-    <main class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center  pt-[7rem] min-h-[100svh] origin-bottom items-center z-50  ">
+    <main class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center  pt-[5rem] min-h-[100svh] origin-bottom items-center z-50  ">
      
         {{-- <section class="grid grid-cols-3 px-10 py-10"> --}}
             
