@@ -102,11 +102,11 @@
 
             <div class="px-10 py-10 mt-10 bg-black bg-opacity-90">
                 <h1 class="underline font-bold">Branch Offers</h1>
-                <section class="grid grid-cols-3 mt-6 gap-5">
+                <section class="flex flex-wrap justify-center mt-6 gap-5">
 
                     @forelse($owner->posts as $post)
                         <div
-                            class="w-full h-fit max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            class=" h-fit max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <div class=" min-h-[16rem] max-h-[16rem] overflow-hidden relative">
                                 <a type="button">
                                     <img class=" h-full rounded-t-lg object-cover origin-top-left  w-full"

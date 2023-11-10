@@ -123,6 +123,11 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
 
     public function store_account(Request $request)
     {
+         $request->validate([
+            'password' => 'required|min:8',
+            'email' => 'required|email|unique:users',
+            
+        ]);
         $user = User::query()->create([
             "firstname"=> ucfirst($request->firstname),
             "lastname"=> ucfirst($request->lastname),

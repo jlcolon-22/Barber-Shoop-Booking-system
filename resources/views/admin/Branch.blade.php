@@ -58,7 +58,7 @@
                                     Branch Number
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Branch Email
+                                    Status
                                 </th>
 
                                 <th scope="col" class="px-6 py-3">

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
 use App\Models\Branch;
 use App\Models\User;
@@ -15,6 +16,7 @@ class FrontendController extends Controller
 
     public function feedback(Request $request)
     {
+
 
        Feedback::create([
             'user_id'=>Auth::id(),
@@ -53,6 +55,11 @@ class FrontendController extends Controller
     public function store_reservation(Request $request)
     {
 
+         $request->validate([
+        'number' => 'required|numeric|digits:11'
+        ]);
+
+       
         Reservation::create([
             'firstname'=>$request->firstname,
             'email'=>$request->email,
@@ -139,6 +146,13 @@ class FrontendController extends Controller
 
        public function update_account(Request $request ,User $id)
     {
+         if (!!$request->password) {
+            $request->validate([
+            'password' => 'min:8',
+           
+            
+        ]);
+         }
         $id->update([
             "firstname"=> ucfirst($request->firstname),
             "lastname"=> ucfirst($request->lastname),

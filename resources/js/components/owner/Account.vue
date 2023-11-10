@@ -100,6 +100,7 @@
                   class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                   >Email address</label
                 >
+                 <small class="text-red-300" v-if="error.email">{{error?.email[0]}}</small>
               </div>
               <div class="relative z-0 w-full mb-6 group">
                 <input
@@ -117,6 +118,7 @@
                   class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                   >Password</label
                 >
+                 <small class="text-red-300" v-if="error.password">{{error?.password[0]}}</small>
               </div>
               <div class="relative z-0 w-full mb-6 group">
                 <input
@@ -143,7 +145,7 @@
               type="submit"
               class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
             >
-              Add Employee
+              {{loading ? 'Loading...' : 'Add Employee'}}
             </button>
             <button
               @click="modal = !modal"
@@ -169,13 +171,16 @@ const data = reactive({
   password: "",
   profile: "",
 });
-
+const error = ref([]);
+const loading = ref(false);
 const upload = (e) => {
   data.profile = e.target.files[0];
 };
 
 const store = async () => {
-  var formData = new FormData();
+    try {
+      loading.value = false
+        var formData = new FormData();
   formData.append("profile", data.profile);
   formData.append("firstname", data.firstname);
   formData.append("lastname", data.lastname);
@@ -184,5 +189,9 @@ const store = async () => {
   await axios.post("/owner/account", formData);
   alert("success");
   window.location.reload();
+    } catch(err) {
+      loading.value = true
+      error.value = err.response.data.errors;
+    }
 };
 </script>

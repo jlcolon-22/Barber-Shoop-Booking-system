@@ -90,6 +90,7 @@
             class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Number</label
             >
+            <small class="text-red-500" v-if="error.number">{{error?.number[0]}}</small>
           </div>
         </div>
 
@@ -121,7 +122,7 @@
     type="submit"
     class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-green-600 hover:bg-green-700 focus:ring-green-800"
     >
-    Update
+    {{loading ? 'Loading...' : 'Update'}}
   </button>
 </form>
 
@@ -134,6 +135,7 @@
   import axios from 'axios'
   const date = ref('')
   const time = ref('')
+  const loading = ref(false);
   const props = defineProps(['data','user'])
   const information = ref([]);
   const data = reactive({
@@ -146,6 +148,7 @@
     post_id: '',
     branch_id: ''
   })
+  const error = ref([]);
   onMounted(() => {
     const newData = JSON.parse(props.data)
     const newUser = JSON.parse(props.user)
@@ -162,8 +165,15 @@
   })
 
   const store = async () =>{
+      try {
+       loading.value = true;
       await axios.post('/reservation', data);
+       loading.value = false;
       window.location.href = '/booked';
+      } catch(err) {
+      loading.value = false
+        error.value = err.response.data.errors
+      }
   }
 </script>
 

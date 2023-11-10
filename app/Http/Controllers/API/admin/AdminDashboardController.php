@@ -43,6 +43,11 @@ class AdminDashboardController extends Controller
     }
     public function store_account(Request $request)
     {
+           $request->validate([
+            'password' => 'required|min:8',
+            'email' => 'required|email|unique:users',
+            
+        ]);
         $user = User::query()->create([
             "firstname"=> ucfirst($request->firstname),
             "lastname"=> ucfirst($request->lastname),
@@ -111,12 +116,15 @@ class AdminDashboardController extends Controller
     public function update_branch(Request $request, Branch $id)
     {
         $id->update([
-            'name'=>$request->name,
+           'name'=>$request->name,
             'number'=>$request->number,
             'location'=>$request->location,
             'email'=>$request->email,
             'status'=>$request->status,
             'owner_id'=>$request->owner_id,
+            'start_time'=>$request->start_time,
+            'end_time'=>$request->end_time,
+            'lat_long'=>$request->lat_long,
         ]);
 
           if(!!$request->photo)

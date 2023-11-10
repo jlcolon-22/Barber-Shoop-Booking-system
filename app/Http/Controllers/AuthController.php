@@ -57,7 +57,12 @@ class AuthController extends Controller
     {
          $url = env('APP_MAIN_DOMAIN');
  
- 
+      $request->validate([
+            'password' => 'required|min:8',
+            'email' => 'required|email|unique:users',
+            
+        ]);
+
         $user = User::create([
             'firstname' =>$request->firstname,
             'lastname' =>$request->lastname,

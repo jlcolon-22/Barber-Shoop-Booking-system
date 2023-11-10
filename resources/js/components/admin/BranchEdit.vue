@@ -44,123 +44,170 @@
           </div>
           <!-- Modal body -->
           <div class="p-6 space-y-6">
-            <div>
-              <div class="grid md:grid-cols-2 md:gap-6">
-                <div class="relative z-0 w-full mb-6 group">
-                  <input
-                    type="text"
-                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
-                    placeholder=" "
-                    required
-                    v-model="data.name"
-                  />
-                  <label
-                    for="floating_first_name"
-                    class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >Branch Name</label
-                  >
-                </div>
-                <div class="relative z-0 w-full mb-6 group">
-                  <input
-                    type="tel"
-                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
-                    placeholder=" "
-                    required
-                    v-model="data.number"
-                  />
-                  <label
-                    for="lastname"
-                    class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >Number</label
-                  >
-                </div>
-              </div>
+             <div>
+    <div class="grid md:grid-cols-2 md:gap-6">
+      <div class="relative z-0 w-full mb-6 group">
+        <input
+        type="text"
+        class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+        placeholder=" "
+        required
+        v-model="data.name"
+        />
+        <label
+        for="floating_first_name"
+        class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >Branch Name</label
+        >
+      </div>
+      
+      <div class="relative z-0 w-full mb-6 group">
+        <input
+        type="tel"
+        class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+        placeholder=" "
+        required
+        v-model="data.number"
+        />
+        <label
+        for="lastname"
+        class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >Number</label
+        >
+      </div>
+    </div>
+    <div class="relative z-0 w-full mb-6 group">
+      <select
+      v-model="data.status"
+      class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+      >
+      <option value="" class="bg-gray-700">Status</option>
+      <option value="1" class="bg-gray-700">Active</option>
+      <option value="0" class="bg-gray-700">Inactive</option>
+    </select>
+    <label
+    for="lastname"
+    class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+    >Status</label
+    >
+  </div>
+  <div class="relative z-0 w-full mb-6 group">
+   <input
+   type="email"
+   class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+   placeholder=" "
+   required
+   v-model="data.email"
+   />
+   <label
+   for="floating_first_name"
+   class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+   >Email</label
+   >
+ </div>
+ <div class="grid md:grid-cols-2 md:gap-6">
+   <div class="relative z-0 w-full mb-6 group">
+    <input
+    type="time"
+    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+    placeholder=" "
+    required
+    v-model="data.start_time"
+    />
+    <label
+    for="floating_first_name"
+    class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+    >Start Time</label
+    >
+  </div>
+  <div class="relative z-0 w-full mb-6 group">
+    <input
+    type="time"
+    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+    placeholder=" "
+    required
+    v-model="data.end_time"
+    />
+    <label
+    for="floating_first_name"
+    class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+    >End TIme</label
+    >
+  </div>
+  
+</div>
 
-              <div class="grid md:grid-cols-2 md:gap-6">
-                <div class="relative z-0 w-full mb-6 group">
-                  <input
-                    type="email"
-                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
-                    placeholder=" "
-                    required
-                    v-model="data.email"
-                  />
-                  <label
-                    for="floating_first_name"
-                    class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >Email</label
-                  >
-                </div>
-                <div class="relative z-0 w-full mb-6 group">
-                  <select
-                    v-model="data.status"
-                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
-                  >
-                    <option value="" class="bg-gray-700">Status</option>
-                    <option value="1" class="bg-gray-700">Active</option>
-                    <option value="0" class="bg-gray-700">Inactive</option>
-                  </select>
-                  <label
-                    for="lastname"
-                    class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >Status</label
-                  >
-                </div>
-              </div>
+<div class="relative z-0 w-full mb-6 group">
+  <select
+  v-model="data.owner_id"
+  class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+  >
+  <option
+  class="bg-gray-700"
+  v-for="(owner, index) in parseJson(owners)"
+  :key="index"
+  :value="owner.id"
+  >
+  {{ owner.firstname + " " + owner.lastname }}
+</option>
+</select>
+<label
+for="password"
+class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+>Owner</label
+>
+</div>
 
-              <div class="relative z-0 w-full mb-6 group">
-                <select
-                  v-model="data.owner_id"
-                  class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
-                >
-                  <option
-                    class="bg-gray-700"
-                    v-for="(owner, index) in parseJson(owners)"
-                    :key="index"
-                    :value="owner.id"
-                  >
-                    {{ owner.firstname + " " + owner.lastname }}
-                  </option>
-                </select>
-                <label
-                  for="password"
-                  class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                  >Owner</label
-                >
-              </div>
+<div class="relative z-0 w-full mb-6 group">
+  <input
+  type="text"
+  autocomplete="no"
+  class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+  placeholder=" "
+  required
+  v-model="data.location"
+  />
+  <label
+  for="floating_email"
+  class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+  >Branch Complete Address</label
+  >
+</div>
 
-              <div class="relative z-0 w-full mb-6 group">
-                <input
-                  type="text"
-                  autocomplete="no"
-                  class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
-                  placeholder=" "
-                  required
-                  v-model="data.location"
-                />
-                <label
-                  for="floating_email"
-                  class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                  >Branch Complete Address</label
-                >
-              </div>
+<div class="relative z-0 w-full mb-6 group">
+  <input
+  type="text"
+  autocomplete="no"
+  class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+  placeholder=" "
+  required
+  v-model="data.lat_long"
+  />
+  <label
+  for="floating_email"
+  class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+  >Latitude and longitude</label
+  >
+</div>
 
-              <div class="relative z-0 w-full mb-6 group">
-                <input
-                  type="file"
-                  name="photo"
-                  id="photo"
-                  class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
-                  placeholder=" "
-                  @change="upload"
-                />
-                <label
-                  for="photo"
-                  class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                  >Branch Photo</label
-                >
-              </div>
-            </div>
+
+<div class="relative z-0 w-full mb-6 group">
+  <input
+  type="file"
+  name="profile"
+  id="profile"
+  class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+  placeholder=" "
+  
+  @change="upload"
+  />
+  <label
+  for="profile"
+  class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+  >Branch Photo</label
+  >
+</div>
+</div>
           </div>
           <!-- Modal footer -->
           <div class="flex items-center p-6 space-x-2 border-t rounded-b border-gray-600">
@@ -169,7 +216,7 @@
               type="submit"
               class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-green-600 hover:bg-green-700 focus:ring-green-800"
             >
-              Update Branch
+              {{loading ? 'Loading...' : 'Update Branch'}}
             </button>
             <button
               @click="modal = !modal"
@@ -189,28 +236,36 @@ import parseJson from "parse-json";
 import { ref, reactive } from "vue";
 import axios from "axios";
 const props = defineProps(["data", "owners"]);
+const loading = ref(false)
 const modal = ref(false);
-const data = reactive({
-  name: "",
-  number: "",
-  status: "",
-  location: "",
-  email: "",
-  owner_id: "",
-  photo: "",
-});
+  const data = reactive({
+    name: "",
+    number: "",
+    status: "",
+    location: "",
+    email: "",
+    owner_id: "",
+    photo: "",
+    start_time: '',
+    end_time: '',
+    lat_long: ''
+  });
 const upload = (e) => {
   data.photo = e.target.files[0];
 };
 const update = async () => {
+  loading.value = true
   var formData = new FormData();
-  formData.append("photo", data.photo);
-  formData.append("name", data.name);
-  formData.append("owner_id", data.owner_id);
-  formData.append("email", data.email);
-  formData.append("number", data.number);
-  formData.append("location", data.location);
-  formData.append("status", data.status);
+formData.append("photo", data.photo);
+    formData.append("name", data.name);
+    formData.append("owner_id", data.owner_id);
+    formData.append("email", data.email);
+    formData.append("number", data.number);
+    formData.append("location", data.location);
+    formData.append("status", data.status);
+    formData.append("start_time", data.start_time);
+    formData.append("end_time", data.end_time);
+    formData.append("lat_long", data.lat_long);
   await axios.post("/admin/branch/" + parseJson(props.data)?.id, formData);
   alert("updated successfully");
   window.location.reload();
@@ -223,6 +278,10 @@ const show = () => {
   data.status = parseProps.status;
   data.owner_id = parseProps.owner_id;
   data.number = parseProps.number;
+  data.status = parseProps.status;
+  data.start_time = parseProps.start_time;
+  data.end_time = parseProps.end_time;
+  data.lat_long = parseProps.lat_long;
 
   modal.value = true;
 };
