@@ -98,7 +98,7 @@
         <div class="grid md:grid-cols-2 md:gap-6">
           <div class="relative z-40 w-full mb-6 group" id="datepicker">
 
-           <VueDatePicker required placeholder="Select Date"  :min-date="new Date()"  :hide-navigation="['time', 'year']" auto-apply  class="block  px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"  v-model="data.date"></VueDatePicker>
+           <VueDatePicker required placeholder="Select Date"  :min-date="new Date()"  :hide-navigation="['time', 'year']" auto-apply  class="block  px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer" :disabled-week-days="[6, 0]" v-model="data.date"></VueDatePicker>
            <label
            for="floating_first_name"
            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -108,7 +108,7 @@
          </div>
 
          <div class="relative z-40 w-full mb-6 group">
-          <VueDatePicker required placeholder="Select Time" time-picker auto-apply :min-time="{ hours: 11, minutes: 30 }"  class="block  px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"  v-model="data.time"></VueDatePicker>
+          <VueDatePicker required placeholder="Select Time" time-picker auto-apply :min-time="minTime" :max-time="maxTime" class="block  px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"  v-model="data.time"></VueDatePicker>
           <label
           for="floating_first_name"
           class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -148,20 +148,33 @@
     post_id: '',
     branch_id: ''
   })
+  const minTime = reactive({
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+   const maxTime = reactive({
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
   const error = ref([]);
   onMounted(() => {
     const newData = JSON.parse(props.data)
     const newUser = JSON.parse(props.user)
     information.value = newData;
-    console.log(JSON.parse(props.data))
+   
     data.post_id = newData?.id;
     data.branch_id = newData?.branch?.id;
     data.firstname = newUser?.firstname;
     data.lastname = newUser?.lastname;
     data.email = newUser?.email;
-
-
-
+ 
+   minTime.hours = newData.branch?.start_time.split(':')[0];
+   minTime.minutes = newData.branch?.start_time.split(':')[1]; 
+   maxTime.hours = newData.branch?.end_time.split(':')[0];
+   maxTime.minutes = newData.branch?.end_time.split(':')[1];
+  
   })
 
   const store = async () =>{

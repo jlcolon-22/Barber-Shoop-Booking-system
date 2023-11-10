@@ -6,7 +6,7 @@
     <x-frontend_header />
 
 
-    <main class="bg-[url('/assets/bg3.jpeg')]  bg-cover bg-center py-[5rem] min-h-[100svh] origin-bottom items-center z-50 ">
+    <main class="bg-[url('/assets/bg3.jpeg')]  bg-cover bg-center  min-h-[100svh] origin-bottom items-center z-50 ">
 
         <section class=" px-10 py-10">
 
@@ -217,12 +217,23 @@
 
 @section('scripts')
     <script>
-        const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
-        const dropdownAvatar = document.querySelector('#dropdownAvatar');
-        dropdownUserAvatarButton?.addEventListener('click', function() {
+        // const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
+        // const dropdownAvatar = document.querySelector('#dropdownAvatar');
+        // dropdownUserAvatarButton.addEventListener('click',function(){
 
-            dropdownAvatar.classList.toggle('hidden')
-        })
+        //     dropdownAvatar.classList.toggle('hidden')
+        // })
+
+        const userDropdown = document.querySelector('#user-dropdown');
+        const navbarUser = document.querySelector('#navbar-user');
+
+        function showDropdown() {
+            userDropdown.classList.toggle('hidden')
+        }
+
+        function showList() {
+            navbarUser.classList.toggle('hidden')
+        }
 
 
         const image = document.querySelector('#Imagemodal');

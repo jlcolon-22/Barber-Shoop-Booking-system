@@ -4,9 +4,9 @@
 @section('content')
 	<x-frontend_header/>
 
-<main class="bg-[url('/assets/bg3.jpeg')]  bg-cover bg-center pt-[5rem] min-h-[100svh] origin-bottom items-center z-50 ">
+<main class="bg-[url('/assets/bg3.jpeg')]  bg-cover bg-center origin-bottom items-center z-50 ">
 
-		<div class="sm:flex  items-center bg-black bg-opacity-60 mx-auto ">
+		<div class="sm:flex  min-h-[100svh] items-center bg-black bg-opacity-60 mx-auto ">
     <div class="sm:w-1/2 p-10">
         <div class="image object-center text-center">
             <img src="{{ asset('assets/about.png')}}">
@@ -31,12 +31,22 @@
 
 
     <script>
-        
-        const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
-        const dropdownAvatar = document.querySelector('#dropdownAvatar');
-        dropdownUserAvatarButton.addEventListener('click',function(){
+      // const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
+        // const dropdownAvatar = document.querySelector('#dropdownAvatar');
+        // dropdownUserAvatarButton.addEventListener('click',function(){
 
-            dropdownAvatar.classList.toggle('hidden')
-        })
+        //     dropdownAvatar.classList.toggle('hidden')
+        // })
+
+        const userDropdown = document.querySelector('#user-dropdown');
+        const navbarUser = document.querySelector('#navbar-user');
+
+        function showDropdown() {
+            userDropdown.classList.toggle('hidden')
+        }
+
+        function showList() {
+            navbarUser.classList.toggle('hidden')
+        }
     </script>
     @endsection

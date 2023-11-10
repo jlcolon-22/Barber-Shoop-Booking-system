@@ -6,7 +6,7 @@
     <x-frontend_header/>
 
 
-    <main class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center  pt-[5rem] min-h-[100svh] origin-bottom items-center z-50  ">
+    <main class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center   origin-bottom items-center z-50  ">
      
         {{-- <section class="grid grid-cols-3 px-10 py-10"> --}}
             
@@ -35,7 +35,7 @@
     @endforelse --}}
 
     {{-- </section> --}}
-       <section  class=" px-10 py-10 bg-black bg-opacity-80">
+       <section  class=" px-10 py-10  min-h-[100svh]  bg-black bg-opacity-80">
         <h1 class="text-center font-bold  pb-10">Choose Location</h1>
             <map_branch locations="{{ $branches }}"></map_branch>
        </section>
@@ -50,11 +50,22 @@
 
     <script>
         
-        const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
-        const dropdownAvatar = document.querySelector('#dropdownAvatar');
-        dropdownUserAvatarButton.addEventListener('click',function(){
+       // const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
+        // const dropdownAvatar = document.querySelector('#dropdownAvatar');
+        // dropdownUserAvatarButton.addEventListener('click',function(){
 
-            dropdownAvatar.classList.toggle('hidden')
-        })
+        //     dropdownAvatar.classList.toggle('hidden')
+        // })
+
+        const userDropdown = document.querySelector('#user-dropdown');
+        const navbarUser = document.querySelector('#navbar-user');
+
+        function showDropdown() {
+            userDropdown.classList.toggle('hidden')
+        }
+
+        function showList() {
+            navbarUser.classList.toggle('hidden')
+        }
     </script>
     @endsection

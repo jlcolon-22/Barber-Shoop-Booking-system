@@ -2,7 +2,7 @@
 
 @section('content')
 <x-frontend_header/>
-<main class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center pb-[5rem] pt-[7rem] min-h-[100svh] origin-bottom items-center z-50 px-3 ">
+<main class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center pb-[5rem] pt-[3rem] min-h-[100svh] origin-bottom items-center z-50 px-3 ">
 
     <div  class="grid grid-cols-1 lg:w-4/5 px-10  mx-auto py-10 bg-black bg-opacity-90">
           <h1 class="pb-10 font-bold">User Appointment History</h1>
@@ -208,12 +208,23 @@
 
 <script>
 
-    const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
-    const dropdownAvatar = document.querySelector('#dropdownAvatar');
-    dropdownUserAvatarButton.addEventListener('click',function(){
+   // const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
+        // const dropdownAvatar = document.querySelector('#dropdownAvatar');
+        // dropdownUserAvatarButton.addEventListener('click',function(){
 
-        dropdownAvatar.classList.toggle('hidden')
-    })
+        //     dropdownAvatar.classList.toggle('hidden')
+        // })
+
+        const userDropdown = document.querySelector('#user-dropdown');
+        const navbarUser = document.querySelector('#navbar-user');
+
+        function showDropdown() {
+            userDropdown.classList.toggle('hidden')
+        }
+
+        function showList() {
+            navbarUser.classList.toggle('hidden')
+        }
 
      const image = document.querySelector('#Imagemodal');
         const res_id = document.querySelector('#res_id');

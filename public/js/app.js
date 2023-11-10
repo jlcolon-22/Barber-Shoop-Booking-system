@@ -23807,18 +23807,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       post_id: '',
       branch_id: ''
     });
+    var minTime = (0,vue__WEBPACK_IMPORTED_MODULE_2__.reactive)({
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    });
+    var maxTime = (0,vue__WEBPACK_IMPORTED_MODULE_2__.reactive)({
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    });
     var error = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
     (0,vue__WEBPACK_IMPORTED_MODULE_2__.onMounted)(function () {
-      var _newData$branch;
+      var _newData$branch, _newData$branch2, _newData$branch3, _newData$branch4, _newData$branch5;
       var newData = JSON.parse(props.data);
       var newUser = JSON.parse(props.user);
       information.value = newData;
-      console.log(JSON.parse(props.data));
       data.post_id = newData === null || newData === void 0 ? void 0 : newData.id;
       data.branch_id = newData === null || newData === void 0 || (_newData$branch = newData.branch) === null || _newData$branch === void 0 ? void 0 : _newData$branch.id;
       data.firstname = newUser === null || newUser === void 0 ? void 0 : newUser.firstname;
       data.lastname = newUser === null || newUser === void 0 ? void 0 : newUser.lastname;
       data.email = newUser === null || newUser === void 0 ? void 0 : newUser.email;
+      minTime.hours = (_newData$branch2 = newData.branch) === null || _newData$branch2 === void 0 ? void 0 : _newData$branch2.start_time.split(':')[0];
+      minTime.minutes = (_newData$branch3 = newData.branch) === null || _newData$branch3 === void 0 ? void 0 : _newData$branch3.start_time.split(':')[1];
+      maxTime.hours = (_newData$branch4 = newData.branch) === null || _newData$branch4 === void 0 ? void 0 : _newData$branch4.end_time.split(':')[0];
+      maxTime.minutes = (_newData$branch5 = newData.branch) === null || _newData$branch5 === void 0 ? void 0 : _newData$branch5.end_time.split(':')[1];
     });
     var store = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -23856,6 +23869,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       props: props,
       information: information,
       data: data,
+      minTime: minTime,
+      maxTime: maxTime,
       error: error,
       store: store,
       VueDatePicker: _vuepic_vue_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -25643,6 +25658,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "hide-navigation": ['time', 'year'],
     "auto-apply": "",
     "class": "block px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer",
+    "disabled-week-days": [6, 0],
     modelValue: $setup.data.date,
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $setup.data.date = $event;
@@ -25652,16 +25668,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Select Time",
     "time-picker": "",
     "auto-apply": "",
-    "min-time": {
-      hours: 11,
-      minutes: 30
-    },
+    "min-time": $setup.minTime,
+    "max-time": $setup.maxTime,
     "class": "block px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer",
     modelValue: $setup.data.time,
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $setup.data.time = $event;
     })
-  }, null, 8 /* PROPS */, ["modelValue"]), _hoisted_34])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.loading ? 'Loading...' : 'Update'), 1 /* TEXT */)], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_1);
+  }, null, 8 /* PROPS */, ["min-time", "max-time", "modelValue"]), _hoisted_34])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.loading ? 'Loading...' : 'Update'), 1 /* TEXT */)], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_1);
 }
 
 /***/ }),

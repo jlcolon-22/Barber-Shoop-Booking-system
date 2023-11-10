@@ -82,7 +82,9 @@ class AdminDashboardController extends Controller
         if(!!$request->profile)
         {
             $filename = time().'-owner.'.$request->profile->extension();
-            unlink(substr($id->profile, 1));
+            if (!!$id->profile) {
+                unlink(substr($id->profile, 1));
+            }
             $id->update([
                 'profile'=>'/storage/owner/'.$filename
             ]);
@@ -130,8 +132,12 @@ class AdminDashboardController extends Controller
           if(!!$request->photo)
         {
              $filename = time().'-branch.'.$request->photo->extension();
-             unlink(substr($id->photo, 1));
-             $id->update([
+             if(!!$id->photo)
+             {
+                unlink(substr($id->photo, 1));
+            
+             }
+              $id->update([
                 'photo'=>'/storage/branch/'.$filename
              ]);
              $request->photo->storeAs('public/branch',$filename);

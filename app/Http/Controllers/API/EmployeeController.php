@@ -41,7 +41,7 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
             'email' => $id->email,
             'date'=>$id->date,
             'time'=>$id->time,
-            'message'=>$id->firstname.' '.$id->lastname." resreservation is finished."
+            'message'=>$id->firstname.' '.$id->lastname." reservation is finished."
          ];
             \Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
 

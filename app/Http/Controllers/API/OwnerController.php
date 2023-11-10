@@ -84,7 +84,9 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
     public function appointment()
     {
         $branch = Branch::where('owner_id',Auth::id())->first();
+
         $appointments = Reservation::with('postInfo','branchInfo')->where('branch_id',$branch->id)->latest()->paginate(6);
+
         return view('owner.reservation',compact('appointments'));
     }
     public function certificate()
@@ -162,7 +164,9 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
         if(!!$request->profile)
         {
             $filename = time().'-employee.'.$request->profile->extension();
-            unlink(substr($id->profile, 1));
+            if (!!$id->profile) {
+               unlink(substr($id->profile, 1));
+            }
             $id->update([
                 'profile'=>'/storage/employee/'.$filename
             ]);
@@ -191,7 +195,7 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
         {
             $filename = time().'-post.'.$request->photo->extension();
             $post->update([
-                'photo'=>env('APP_MAIN_DOMAIN').'/storage/post/'.$filename
+                'photo'=>'/storage/post/'.$filename
             ]);
 
             $request->photo->storeAs('public/post',$filename);
@@ -214,7 +218,7 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
 
             unlink(substr($id->photo, 1));
             $id->update([
-                'photo'=>env('APP_MAIN_DOMAIN').'/storage/post/'.$filename
+                'photo'=>'/storage/post/'.$filename
             ]);
 
             $request->photo->storeAs('public/post',$filename);
